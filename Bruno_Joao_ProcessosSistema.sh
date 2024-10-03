@@ -4,15 +4,21 @@
 
 if [ $# -gt 1 ]
 then
-	echo "Muitos Argumentos! Programa Encerrado!"
-	exit 1
+        echo "Muitos Argumentos! Programa Encerrado!"
+        exit 1
 else
-	if [ $# -eq 1 ]
-	then
-		usuario=$1
-	else
-		usuario=$(whoami)
-	fi
+        if [ $# -eq 1 ]
+        then
+                usuario=$1
+        else
+                usuario=$(whoami)
+        fi
 fi
 
-echo $usuario
+if user_id=$(id -u $usuario)
+then
+        echo -e "Usuário: $usuario\nUser ID: $user_id"
+else
+        echo "Usuário Inexistente! Programa Encerrado!"
+	exit 1
+fi
